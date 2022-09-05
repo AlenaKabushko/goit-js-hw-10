@@ -2,8 +2,6 @@ import './css/styles.css';
 import { fetchCountries } from './fetchCountries';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import debounce from 'lodash.debounce';
-//import templateOneCountry from './templates/templateOneCountry.hbs';
-//import templateCountries from './templates/templateCountries.hbs'
 
 const DEBOUNCE_DELAY = 300;
 
@@ -11,36 +9,17 @@ const refs = {
     inputRef: document.querySelector("#search-box"),
     countryListRef: document.querySelector(".country-list"),
     countryInfoRef: document.querySelector(".country-info"),
-}
-console.log(refs)
-
-//-----------------render from template-----------
-
-// const render = (countryList) => {
-//     if (countryList.length === 1) {
-//         refs.countryInfoRef.innerHTML = templateOneCountry(countryList[0]);
-//     } else if (1 < countryList.length <= 10) {
-//         renderCountries(countryList)
-//     }
-// }
-
-// const renderCountries = (countryList) => {
-//     return countryList.map((countryListItem) => {
-//         const rend = templateCountries(countryListItem);
-//         return refs.countryListRef.innerHTML = rend
-//     }).join('')
-// }
+};
 
 const render = (countryList) => {
     if (countryList.length === 1) {
         refs.countryListRef.innerHTML = "";
         renderOne(countryList);
-
     } else if (countryList.length > 1 && countryList.length <= 10) {
         refs.countryInfoRef.innerHTML = "";
         renderAll(countryList);
     }
-}
+};
 
 const renderOne = (countryList) => {
     const render = countryList.map(
@@ -72,12 +51,9 @@ const renderAll = (countryList) => {
 const onFetch = (event) => {
     event.preventDefault();
     const countryFromInput = event.target.value.trim();
-    console.log(countryFromInput);
-
-
+    
     fetchCountries(countryFromInput)
     .then((countryList) => {
-        console.log(countryList);
         if (countryList.length > 10) {
             Notify.info('Too many matches found. Please enter a more specific name');
         } 
@@ -88,16 +64,15 @@ const onFetch = (event) => {
     .catch((error) => {
         console.log(error);
             if (countryFromInput === "") {
-                console.log("clear string");
                 refs.countryInfoRef.innerHTML = "";
                 refs.countryListRef.innerHTML = "";
-            Notify.info('Select a country, please');
+                Notify.info('Select a country, please');
         } else {Notify.failure(`Oops, there is no country with ${countryFromInput} name`)}
     }
     );
 };
 
-refs.inputRef.addEventListener("input", (debounce(onFetch, DEBOUNCE_DELAY)))
+refs.inputRef.addEventListener("input", (debounce(onFetch, DEBOUNCE_DELAY)));
 
 
 
