@@ -10,6 +10,12 @@ body {
   background-color: #fafafa;
   color: #212121;
   line-height: 1.5;
+  margin: 20px;
+}
+
+div,
+p {
+  margin: 0;
 }
 
 #search-box {
@@ -17,4 +23,38 @@ body {
   padding: 8px;
   max-width: 320px;
   margin-bottom: 16px;
+}
+
+.country-info__title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.country-info__name {
+  margin-left: 15px;
+  font-size: 36px;
+  font-weight: 700;
+}
+
+.country-info__info {
+  font-size: 24px;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.country-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.country-list__item {
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.country-list__name {
+  margin-left: 15px;
 }
